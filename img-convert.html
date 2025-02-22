@@ -11,23 +11,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #667eea, #764ba2);
       color: #fff;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    #particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #667eea, #764ba2);
     }
     .container {
       max-width: 1200px;
       width: 100%;
       padding: 20px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
     h1 {
       font-size: 2.5rem;
@@ -77,22 +91,56 @@
     .file-input-label i {
       margin-right: 10px;
     }
-    .format-select {
+    .custom-dropdown {
+      position: relative;
+      width: 100%;
+      margin: 20px 0;
+    }
+    .dropdown-btn {
       width: 100%;
       padding: 12px;
-      margin: 20px 0;
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.2);
       color: #fff;
       font-size: 1rem;
       cursor: pointer;
-      appearance: none;
-      outline: none;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .format-select option {
-      background: #764ba2;
+    .dropdown-btn i {
+      margin-left: 10px;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+    .dropdown-content.show {
+      display: block;
+    }
+    .dropdown-content button {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: none;
       color: #fff;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .dropdown-content button:hover {
+      background: rgba(255, 255, 255, 0.3);
     }
     .convert-btn {
       width: 100%;
@@ -166,6 +214,9 @@
   </style>
 </head>
 <body>
+  <!-- Particles.js Background -->
+  <div id="particles-js"></div>
+
   <div class="container">
     <h1>Image Converter Tool</h1>
     <div class="converter-tool">
@@ -175,19 +226,24 @@
           <i class="fas fa-upload"></i> Choose an Image
         </label>
       </div>
-      <select class="format-select">
-        <option value="bmp">BMP</option>
-        <option value="gif">GIF</option>
-        <option value="ico">ICO</option>
-        <option value="eps">EPS</option>
-        <option value="jpeg">JPEG</option>
-        <option value="png">PNG</option>
-        <option value="psd">PSD</option>
-        <option value="svg">SVG</option>
-        <option value="tga">TGA</option>
-        <option value="tiff">TIFF</option>
-        <option value="webp">WEBP</option>
-      </select>
+      <div class="custom-dropdown">
+        <button class="dropdown-btn">
+          Select Format <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <button data-format="bmp">BMP</button>
+          <button data-format="gif">GIF</button>
+          <button data-format="ico">ICO</button>
+          <button data-format="eps">EPS</button>
+          <button data-format="jpeg">JPEG</button>
+          <button data-format="png">PNG</button>
+          <button data-format="psd">PSD</button>
+          <button data-format="svg">SVG</button>
+          <button data-format="tga">TGA</button>
+          <button data-format="tiff">TIFF</button>
+          <button data-format="webp">WEBP</button>
+        </div>
+      </div>
       <button class="convert-btn">Convert Image</button>
       <div class="loader"></div>
       <a href="#" class="download-btn" download>
@@ -212,9 +268,32 @@
   </div>
 
   <script>
+    // Initialize Particles.js
+    particlesJS.load('particles-js', 'particles.json', function () {
+      console.log('Particles.js loaded!');
+    });
+
+    // Custom Dropdown Logic
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    const formatButtons = document.querySelectorAll('.dropdown-content button');
+    let selectedFormat = '';
+
+    dropdownBtn.addEventListener('click', () => {
+      dropdownContent.classList.toggle('show');
+    });
+
+    formatButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        selectedFormat = button.getAttribute('data-format');
+        dropdownBtn.textContent = `Selected: ${selectedFormat.toUpperCase()}`;
+        dropdownContent.classList.remove('show');
+      });
+    });
+
+    // Image Conversion Logic
     document.querySelector('.convert-btn').addEventListener('click', function () {
       const fileInput = document.querySelector('.file-input');
-      const formatSelect = document.querySelector('.format-select');
       const downloadBtn = document.querySelector('.download-btn');
       const loader = document.querySelector('.loader');
 
@@ -223,12 +302,16 @@
         return;
       }
 
+      if (!selectedFormat) {
+        alert('Please select a format.');
+        return;
+      }
+
       // Show loader
       loader.style.display = 'block';
       downloadBtn.style.display = 'none';
 
       const file = fileInput.files[0];
-      const format = formatSelect.value;
       const reader = new FileReader();
 
       reader.onload = function (e) {
@@ -246,9 +329,9 @@
             const url = URL.createObjectURL(blob);
             downloadBtn.href = url;
             downloadBtn.style.display = 'block';
-            downloadBtn.download = `converted-image.${format}`;
+            downloadBtn.download = `converted-image.${selectedFormat}`;
             loader.style.display = 'none';
-          }, `image/${format}`, 1);
+          }, `image/${selectedFormat}`, 1);
         };
       };
 
