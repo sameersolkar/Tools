@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Compress your images online easily with our responsive image compression tool. Optimize images for web use with adjustable compression levels.">
     <meta name="keywords" content="image compression, optimize images, image optimizer, compress images online">
-    <meta name="author" content=sameer">
+    <meta name="author" content="Your Name">
     <title>Image Compression Tool - Optimize Your Images Online</title>
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* CSS for Styling */
         body {
@@ -174,20 +176,16 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: conic-gradient(#007bff 0%, #e0e0e0 0%);
+            background: conic-gradient(#333 0%, #e0e0e0 0%); /* Black and gray */
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: progress 2s linear infinite;
         }
 
-        @keyframes progress {
-            0% {
-                background: conic-gradient(#007bff 0%, #e0e0e0 0%);
-            }
-            100% {
-                background: conic-gradient(#007bff 100%, #e0e0e0 0%);
-            }
+        .progress-circle::after {
+            content: attr(data-progress) "%";
+            font-size: 1rem;
+            color: #333; /* Dark text */
         }
 
         /* Responsive Design */
@@ -207,6 +205,15 @@
 
             .header-container .title {
                 font-size: 1.5rem; /* Smaller font size for mobile */
+            }
+
+            .progress-circle {
+                width: 40px; /* Smaller progress bar for mobile */
+                height: 40px;
+            }
+
+            .progress-circle::after {
+                font-size: 0.8rem; /* Smaller text for mobile */
             }
         }
     </style>
@@ -239,7 +246,7 @@
 
             <!-- Circular Progress Bar -->
             <div class="progress-container" id="progress-container">
-                <div class="progress-circle"></div>
+                <div class="progress-circle" data-progress="0"></div>
             </div>
         </section>
 
@@ -293,7 +300,20 @@
             if (file) {
                 // Show progress bar
                 const progressContainer = document.getElementById('progress-container');
+                const progressCircle = document.querySelector('.progress-circle');
                 progressContainer.style.display = 'flex';
+
+                // Simulate progress (for demonstration purposes)
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 10;
+                    progressCircle.style.background = `conic-gradient(#333 ${progress}%, #e0e0e0 ${progress}%)`;
+                    progressCircle.setAttribute('data-progress', progress);
+
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                    }
+                }, 200);
 
                 const options = {
                     maxSizeMB: compressionLevel,
