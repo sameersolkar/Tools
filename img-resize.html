@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Free Online Image Resizer Tool - Resize images by pixels, percent, centimeters, or inches. Adjust format, quality, and resolution. Download resized images instantly.">
   <meta name="keywords" content="image resizer, resize image, image tool, online image editor, image converter">
-  <meta name="author" content="sameer">
+  <meta name="author" content="sameer>
   <title>Image Resizer Tool - Resize Images Online</title>
   <style>
     /* General Styles */
@@ -13,20 +13,29 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f9;
+      background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fancy gradient background */
       color: #333;
       line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .container {
       max-width: 1200px;
-      margin: 0 auto;
+      width: 90%;
+      margin: 20px auto;
       padding: 20px;
+      background: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
     }
 
     h1 {
       text-align: center;
-      color: #4a90e2;
+      color: #2575fc; /* Light blue for the heading */
       font-size: 2.5rem;
       margin-bottom: 20px;
     }
@@ -61,19 +70,22 @@
       border-radius: 8px;
       font-size: 1rem;
       transition: border-color 0.3s ease;
+      background: #f9f9f9;
+      color: #333;
     }
 
     .input-group input:focus,
     .input-group select:focus {
-      border-color: #4a90e2;
+      border-color: #2575fc;
       outline: none;
+      background: #fff;
     }
 
     /* Buttons */
     .button {
       display: inline-block;
       padding: 12px 24px;
-      background-color: #4a90e2;
+      background-color: #2575fc; /* Light blue button */
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -85,7 +97,7 @@
     }
 
     .button:hover {
-      background-color: #357abd;
+      background-color: #1a5bbf; /* Darker blue on hover */
     }
 
     /* Ad Space */
@@ -115,11 +127,11 @@
 
     .download-btn {
       margin-top: 20px;
-      background-color: #28a745;
+      background-color: #28a745; /* Green download button */
     }
 
     .download-btn:hover {
-      background-color: #218838;
+      background-color: #218838; /* Darker green on hover */
     }
 
     /* Footer */
@@ -127,9 +139,9 @@
       text-align: center;
       margin-top: 40px;
       padding: 20px;
-      background-color: #333;
-      color: #fff;
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
       border-radius: 12px;
+      color: #333;
     }
 
     footer p {
