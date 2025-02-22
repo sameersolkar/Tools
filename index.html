@@ -77,10 +77,7 @@ input[type="file"] {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-// script.js
-document.getElementById('compressionLevel').addEventListener('input', function () {
-    document.getElementById('compressionValue').textContent = this.value;
-});
+
 
 document.getElementById('pdfForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -92,32 +89,9 @@ document.getElementById('pdfForm').addEventListener('submit', function (e) {
     } else {
         alert('Please select a PDF file.');
     }
-});
-
-function compressPDF(file, compressionLevel) {
-    const formData = new FormData();
-    formData.append('pdfFile', file);
-    formData.append('compressionLevel', compressionLevel);
-
-    fetch('/compress', { // Replace with your backend endpoint
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.blob())
-    .then(blob => {
-        const url = URL.createObjectURL(blob);
-        const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<a href="${url}" download="compressed.pdf">Download Compressed PDF</a>`;
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while compressing the PDF.');
-    });
-}
 input[type="range"] {
     width: 100%;
 }
-
 button {
     padding: 10px;
     background: #007BFF;
