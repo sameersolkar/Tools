@@ -3,163 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Online PDF Compressor tool to compress and optimize PDF files for free.">
-    <meta name="keywords" content="PDF compressor, online PDF optimization, compress PDF file, free PDF tool">
+    <meta name="description" content="Compress your PDF files easily with our online PDF compressor. Optimize PDF size without losing quality.">
+    <meta name="keywords" content="PDF, compress, compress PDF online, optimize PDF, PDF size, free PDF tool">
     <meta name="author" content="sameer">
-    <title>PDF Compressor - Compress PDF Files Online</title>
-
-    <!-- Open Graph Metadata for social media SEO -->
-    <meta property="og:title" content="Online PDF Compressor">
-    <meta property="og:description" content="Compress and optimize your PDF files online for free.">
-    <meta property="og:image" content="image.jpg">
-    <meta property="og:url" content="https://www.yoursite.com">
-    
+    <title>Online PDF Compressor Tool</title>
+    <!-- Google Fonts Integration -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
     <style>
-        /* styles.css */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            background-color: #f4f4f4;
+            background-color: #f4f7f6;
+            color: #333;
         }
-
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
+            background: #009688;
+            color: white;
+            padding: 15px 0;
             text-align: center;
         }
-
-        header h1 {
-            margin: 0;
-        }
-
-        .container {
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        .content {
-            margin-top: 20px;
-        }
-
-        .pdf-upload {
+        main {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
+            height: 80vh;
+            flex-direction: column;
+            gap: 20px;
         }
-
         input[type="file"] {
             padding: 10px;
-            font-size: 16px;
+            border: none;
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 5px;
         }
-
         button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
             color: white;
+            background-color: #009688;
             border: none;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            cursor: pointer;
         }
-
         button:hover {
-            background-color: #45a049;
+            background-color: #00796b;
         }
-
-        #ad-space {
-            margin-top: 20px;
-            text-align: center;
-        }
-
         footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
             text-align: center;
-            margin-top: 40px;
+            padding: 20px;
+            background-color: #333;
+            color: white;
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                width: 100%;
-                padding: 10px;
-            }
+        .ads-container {
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>PDF Compressor Tool</h1>
-            <p>Compress and optimize your PDF files online for free.</p>
-        </div>
+        <h1>Online PDF Compressor Tool</h1>
+        <p>Compress and optimize your PDF files quickly and for free!</p>
     </header>
+    
+    <main>
+        <input type="file" id="pdfFile" accept=".pdf">
+        <button id="compressBtn">Compress PDF</button>
 
-    <section class="content">
-        <div class="container">
-            <div class="pdf-upload">
-                <input type="file" id="pdf-file" accept=".pdf">
-                <button id="compress-btn">Compress PDF</button>
-            </div>
-
-            <div id="ad-space">
-                <!-- Placeholder for Google AdSense Ad Code -->
-                <div class="adsense">
-                    <!-- Google AdSense code goes here -->
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="YOUR_ADSENSE_CLIENT_ID"
-                         data-ad-slot="YOUR_ADSENSE_AD_SLOT"
-                         data-ad-format="auto"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-
-            <div id="output">
-                <p>Your compressed PDF will appear here after compression.</p>
-            </div>
+        <!-- Placeholder for AdSense -->
+        <div class="ads-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="YOUR_AD_CLIENT"
+                 data-ad-slot="YOUR_AD_SLOT"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
-    </section>
+
+        <!-- Hidden Download Button -->
+        <a id="downloadBtn" href="#" style="display: none;">
+            <button>Download Compressed PDF</button>
+        </a>
+    </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Your Company Name - All Rights Reserved.</p>
-        </div>
+        <p>&copy; 2025 Your Company. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // script.js
+        document.getElementById('compressBtn').addEventListener('click', function() {
+            var fileInput = document.getElementById('pdfFile');
+            var file = fileInput.files[0];
+            if (file && file.type === 'application/pdf') {
+                // Example: Process the PDF (this would normally be a call to a server-side service or an API)
+                // Here, we'll simulate this with a timeout for illustration.
+                setTimeout(function() {
+                    // Normally, after compression, the compressed file URL would be provided.
+                    // For now, we'll simulate a download URL.
+                    var compressedFileURL = 'path/to/compressed-pdf-file.pdf'; // Replace with actual file URL
 
-        document.getElementById('compress-btn').addEventListener('click', function () {
-            const fileInput = document.getElementById('pdf-file');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert('Please select a PDF file to compress.');
-                return;
+                    // Show the download button
+                    var downloadBtn = document.getElementById('downloadBtn');
+                    downloadBtn.style.display = 'block';
+                    downloadBtn.href = compressedFileURL;
+                }, 3000); // Simulating compression delay (3 seconds)
+            } else {
+                alert('Please upload a valid PDF file.');
             }
-
-            // Simulating compression process (replace this with actual compression logic)
-            alert('Compressing PDF...');
-
-            // Example: In actual implementation, you would use a library like PDF.js or an API
-            // to compress and optimize the file. The following is a placeholder.
-            setTimeout(() => {
-                document.getElementById('output').innerHTML = `
-                    <p>Your PDF has been compressed. <a href="#">Download compressed PDF</a>.</p>
-                `;
-            }, 2000); // Simulate 2 seconds compression time
         });
     </script>
 </body>
