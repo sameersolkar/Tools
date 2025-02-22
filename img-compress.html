@@ -7,6 +7,8 @@
     <meta name="keywords" content="image compression, optimize images, image optimizer, compress images online">
     <meta name="author" content="sameer">
     <title>Image Compression Tool - Optimize Your Images Online</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* CSS for Styling */
         body {
@@ -18,7 +20,7 @@
         }
 
         header {
-            background-color: #4CAF50;
+            background-color: #2196F3; /* Blue */
             color: white;
             padding: 1.5rem;
             text-align: center;
@@ -45,7 +47,7 @@
 
         #compression-tool label {
             display: inline-block;
-            background-color: #4CAF50;
+            background-color: #2196F3; /* Blue */
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 5px;
@@ -54,7 +56,7 @@
         }
 
         #compression-tool label:hover {
-            background-color: #45a049;
+            background-color: #1E88E5; /* Darker Blue */
         }
 
         #compression-level {
@@ -63,7 +65,7 @@
         }
 
         #compress-btn {
-            background-color: #4CAF50;
+            background-color: #2196F3; /* Blue */
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -73,7 +75,7 @@
         }
 
         #compress-btn:hover {
-            background-color: #45a049;
+            background-color: #1E88E5; /* Darker Blue */
         }
 
         #output {
@@ -90,7 +92,7 @@
 
         #download-btn {
             display: none;
-            background-color: #4CAF50;
+            background-color: #2196F3; /* Blue */
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -101,17 +103,18 @@
         }
 
         #download-btn:hover {
-            background-color: #45a049;
+            background-color: #1E88E5; /* Darker Blue */
         }
 
         footer {
             background-color: #333;
             color: white;
             text-align: center;
-            padding: 1rem;
+            padding: 0.5rem;
             position: fixed;
             bottom: 0;
             width: 100%;
+            font-size: 0.9rem;
         }
 
         /* Responsive Design */
@@ -132,6 +135,22 @@
     </header>
 
     <main>
+        <!-- Google AdSense Ad Unit -->
+        <section id="ad-section">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_UNIT_ID"
+                    crossorigin="anonymous"></script>
+            <!-- Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_AD_UNIT_ID"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+
         <!-- Image Compression Tool -->
         <section id="compression-tool">
             <input type="file" id="image-input" accept="image/*">
