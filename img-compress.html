@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compress your images online easily with our responsive image compression tool. Optimize images for web use with adjustable compression levels.">
+    <meta name="keywords" content="image compression, optimize images, image optimizer, compress images online">
+    <meta name="author" content="Your Name">
+    <title>Image Compression Tool - Optimize Your Images Online</title>
+    <style>
+        /* CSS for Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #compression-tool {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #compression-tool input[type="file"] {
+            display: none;
+        }
+
+        #compression-tool label {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #compression-tool label:hover {
+            background-color: #45a049;
+        }
+
+        #compression-level {
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+
+        #compress-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #compress-btn:hover {
+            background-color: #45a049;
+        }
+
+        #output {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        #output img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #download-btn {
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        #download-btn:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            main {
+                padding: 1rem;
+            }
+
+            #compression-tool {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Image Compression Tool</h1>
+    </header>
+
+    <main>
+        <!-- Image Compression Tool -->
+        <section id="compression-tool">
+            <input type="file" id="image-input" accept="image/*">
+            <label for="image-input">Upload Image</label>
+            <br><br>
+            <label for="compression-level">Compression Level: <span id="compression-value">0.5</span></label>
+            <input type="range" id="compression-level" min="0" max="1" step="0.1" value="0.5">
+            <br><br>
+            <button id="compress-btn">Compress Image</button>
+            <div id="output"></div>
+            <button id="download-btn">Download Compressed Image</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Image Compression Tool. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression/dist/browser-image-compression.min.js"></script>
+    <script>
+        // Update compression level value display
+        const compressionLevel = document.getElementById('compression-level');
+        const compressionValue = document.getElementById('compression-value');
+        compressionLevel.addEventListener('input', () => {
+            compressionValue.textContent = compressionLevel.value;
+        });
+
+        // Image compression logic
+        document.getElementById('compress-btn').addEventListener('click', async () => {
+            const file = document.getElementById('image-input').files[0];
+            const compressionLevel = parseFloat(document.getElementById('compression-level').value);
+
+            if (file) {
+                const options = {
+                    maxSizeMB: compressionLevel,
+                    maxWidthOrHeight: 1024,
+                    useWebWorker: true
+                };
+
+                try {
+                    const compressedFile = await imageCompression(file, options);
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        document.getElementById('output').innerHTML = '';
+                        document.getElementById('output').appendChild(img);
+
+                        // Show download button
+                        const downloadBtn = document.getElementById('download-btn');
+                        downloadBtn.style.display = 'inline-block';
+                        downloadBtn.onclick = () => {
+                            const link = document.createElement('a');
+                            link.href = e.target.result;
+                            link.download = `compressed-${file.name}`;
+                            link.click();
+                        };
+                    };
+                    reader.readAsDataURL(compressedFile);
+                } catch (error) {
+                    console.error('Error compressing image:', error);
+                    alert('An error occurred while compressing the image. Please try again.');
+                }
+            } else {
+                alert('Please select an image to compress.');
+            }
+        });
+    </script>
+</body>
+</html>
