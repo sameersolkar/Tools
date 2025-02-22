@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Convert images to various formats like BMP, GIF, ICO, EPS, JPEG, PNG, PSD, SVG, TGA, TIFF, and WEBP.">
+  <meta name="keywords" content="image converter, convert images, bmp, gif, ico, eps, jpeg, png, psd, svg, tga, tiff, webp">
+  <meta name="author" content="Your Name">
+  <title>Image Converter Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .converter-tool {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .file-input, .format-select, .convert-btn {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .convert-btn {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .convert-btn:hover {
+      background-color: #0056b3;
+    }
+    .download-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .download-btn:hover {
+      background-color: #218838;
+    }
+    .ad-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .ad-container ins {
+      display: inline-block;
+      width: 100%;
+      max-width: 728px;
+      height: 90px;
+      background-color: #eee;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Converter Tool</h1>
+    <div class="converter-tool">
+      <input type="file" class="file-input" accept="image/*">
+      <select class="format-select">
+        <option value="bmp">BMP</option>
+        <option value="gif">GIF</option>
+        <option value="ico">ICO</option>
+        <option value="eps">EPS</option>
+        <option value="jpeg">JPEG</option>
+        <option value="png">PNG</option>
+        <option value="psd">PSD</option>
+        <option value="svg">SVG</option>
+        <option value="tga">TGA</option>
+        <option value="tiff">TIFF</option>
+        <option value="webp">WEBP</option>
+      </select>
+      <button class="convert-btn">Convert Image</button>
+      <a href="#" class="download-btn" download>Download Converted Image</a>
+    </div>
+    <div class="ad-container">
+      <!-- Google AdSense Ad Unit -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="YOUR-ADSENSE-CLIENT-ID"
+           data-ad-slot="YOUR-AD-UNIT-ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+    <footer>
+      <p>&copy; 2023 Image Converter Tool. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelector('.convert-btn').addEventListener('click', function () {
+      const fileInput = document.querySelector('.file-input');
+      const formatSelect = document.querySelector('.format-select');
+      const downloadBtn = document.querySelector('.download-btn');
+
+      if (fileInput.files.length === 0) {
+        alert('Please select an image file.');
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const format = formatSelect.value;
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+
+          canvas.toBlob(function (blob) {
+            const url = URL.createObjectURL(blob);
+            downloadBtn.href = url;
+            downloadBtn.style.display = 'block';
+            downloadBtn.download = `converted-image.${format}`;
+          }, `image/${format}`, 1);
+        };
+      };
+
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
