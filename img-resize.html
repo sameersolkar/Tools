@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Free Online Image Resizer Tool - Resize images in pixels, percent, centimeters, or inches. Adjust format, quality, and resolution. Download resized images easily.">
   <meta name="keywords" content="image resizer, resize image, image tool, online image editor, image converter">
-  <meta name="author" content="sameer">
+  <meta name="author" content="Your Name">
   <title>Image Resizer Tool - Resize Images Online</title>
   <style>
     /* General Styles */
@@ -25,21 +25,27 @@
     .container {
       background: #fff;
       border-radius: 10px;
-      padding: 25px;
       width: 90%;
       max-width: 800px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
-    h1 {
+    /* Header Box */
+    .header-box {
+      background: #2575fc;
+      padding: 20px;
+      border-radius: 10px 10px 0 0;
       text-align: center;
-      margin-bottom: 20px;
+    }
+
+    .header-box h1 {
+      margin: 0;
       font-size: 2.5rem;
-      color: #2575fc;
+      color: #fff;
     }
 
     .upload-section, .options-section, .output-section {
-      margin-bottom: 25px;
+      padding: 25px;
     }
 
     label {
@@ -124,12 +130,8 @@
     }
 
     @media (max-width: 768px) {
-      h1 {
+      .header-box h1 {
         font-size: 2rem;
-      }
-
-      .container {
-        padding: 20px;
       }
 
       .row {
@@ -140,7 +142,10 @@
 </head>
 <body>
   <div class="container">
-    <h1>Image Resizer Tool</h1>
+    <!-- Header Box -->
+    <div class="header-box">
+      <h1>Image Resizer Tool</h1>
+    </div>
 
     <!-- Ad Space -->
     <div class="ads">
@@ -160,16 +165,8 @@
 
     <!-- Options Section -->
     <div class="options-section">
-      <!-- First Row: Width, Height, Resize Unit -->
+      <!-- First Row: Resize Unit, Width, Height -->
       <div class="row">
-        <div>
-          <label for="width">Width:</label>
-          <input type="number" id="width" placeholder="Enter width">
-        </div>
-        <div>
-          <label for="height">Height:</label>
-          <input type="number" id="height" placeholder="Enter height">
-        </div>
         <div>
           <label for="resize-unit">Resize Unit:</label>
           <select id="resize-unit">
@@ -178,6 +175,14 @@
             <option value="cm">Centimeters</option>
             <option value="inches">Inches</option>
           </select>
+        </div>
+        <div>
+          <label for="width">Width:</label>
+          <input type="number" id="width" placeholder="Enter width">
+        </div>
+        <div>
+          <label for="height">Height:</label>
+          <input type="number" id="height" placeholder="Enter height">
         </div>
       </div>
 
