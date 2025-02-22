@@ -46,13 +46,16 @@
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .input-row {
+      display: flex;
       gap: 20px;
+      margin-bottom: 20px;
     }
 
     .input-group {
-      margin-bottom: 20px;
+      flex: 1;
     }
 
     .input-group label {
@@ -155,8 +158,9 @@
         font-size: 2rem;
       }
 
-      .tool-container {
-        padding: 20px;
+      .input-row {
+        flex-direction: column;
+        gap: 15px;
       }
 
       .input-group input,
@@ -175,39 +179,48 @@
   <div class="container">
     <h1>Image Resizer Tool</h1>
     <div class="tool-container">
-      <div class="input-group">
-        <label for="image-upload">Upload Image</label>
-        <input type="file" id="image-upload" accept="image/*">
+      <!-- First Row: Upload Image, Resize Unit, Resolution (DPI) -->
+      <div class="input-row">
+        <div class="input-group">
+          <label for="image-upload">Upload Image</label>
+          <input type="file" id="image-upload" accept="image/*">
+        </div>
+        <div class="input-group">
+          <label for="resize-unit">Resize Unit</label>
+          <select id="resize-unit">
+            <option value="percent">Percent</option>
+            <option value="pixels">Pixels</option>
+            <option value="cm">Centimeters</option>
+            <option value="inches">Inches</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="resolution">Resolution (DPI)</label>
+          <input type="number" id="resolution" placeholder="Enter resolution">
+        </div>
       </div>
-      <div class="input-group">
-        <label for="resize-unit">Resize Unit</label>
-        <select id="resize-unit">
-          <option value="percent">Percent</option>
-          <option value="pixels">Pixels</option>
-          <option value="cm">Centimeters</option>
-          <option value="inches">Inches</option>
-        </select>
+
+      <!-- Second Row: Height, Width, Image Format -->
+      <div class="input-row">
+        <div class="input-group">
+          <label for="height">Height</label>
+          <input type="number" id="height" placeholder="Enter height">
+        </div>
+        <div class="input-group">
+          <label for="width">Width</label>
+          <input type="number" id="width" placeholder="Enter width">
+        </div>
+        <div class="input-group">
+          <label for="format">Image Format</label>
+          <select id="format">
+            <option value="png">PNG</option>
+            <option value="jpeg">JPEG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
       </div>
-      <div class="input-group">
-        <label for="width">Width</label>
-        <input type="number" id="width" placeholder="Enter width">
-      </div>
-      <div class="input-group">
-        <label for="height">Height</label>
-        <input type="number" id="height" placeholder="Enter height">
-      </div>
-      <div class="input-group">
-        <label for="resolution">Resolution (DPI)</label>
-        <input type="number" id="resolution" placeholder="Enter resolution">
-      </div>
-      <div class="input-group">
-        <label for="format">Image Format</label>
-        <select id="format">
-          <option value="png">PNG</option>
-          <option value="jpeg">JPEG</option>
-          <option value="webp">WebP</option>
-        </select>
-      </div>
+
+      <!-- Quality and Resize Button -->
       <div class="input-group">
         <label for="quality">Quality (1-100)</label>
         <input type="number" id="quality" min="1" max="100" placeholder="Enter quality">
