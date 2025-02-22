@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free Online Image Resizer Tool - Resize images by pixels, percent, centimeters, or inches. Adjust format, quality, and resolution. Download resized images instantly.">
+  <meta name="keywords" content="image resizer, resize image, image tool, online image editor, image converter">
+  <meta name="author" content="sameer">
+  <title>Image Resizer Tool - Resize Images Online</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4a90e2;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    /* Tool Container */
+    .tool-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+      border-color: #4a90e2;
+      outline: none;
+    }
+
+    /* Buttons */
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #357abd;
+    }
+
+    /* Ad Space */
+    .ads {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .ads iframe {
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    /* Output Image */
+    .output-image {
+      margin-top: 30px;
+      text-align: center;
+      display: none;
+    }
+
+    .output-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .download-btn {
+      margin-top: 20px;
+      background-color: #28a745;
+    }
+
+    .download-btn:hover {
+      background-color: #218838;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #333;
+      color: #fff;
+      border-radius: 12px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .tool-container {
+        padding: 20px;
+      }
+
+      .input-group input,
+      .input-group select {
+        padding: 10px;
+      }
+
+      .button {
+        width: 100%;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Resizer Tool</h1>
+    <div class="tool-container">
+      <div class="input-group">
+        <label for="image-upload">Upload Image</label>
+        <input type="file" id="image-upload" accept="image/*">
+      </div>
+      <div class="input-group">
+        <label for="resize-unit">Resize Unit</label>
+        <select id="resize-unit">
+          <option value="percent">Percent</option>
+          <option value="pixels">Pixels</option>
+          <option value="cm">Centimeters</option>
+          <option value="inches">Inches</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="width">Width</label>
+        <input type="number" id="width" placeholder="Enter width">
+      </div>
+      <div class="input-group">
+        <label for="height">Height</label>
+        <input type="number" id="height" placeholder="Enter height">
+      </div>
+      <div class="input-group">
+        <label for="resolution">Resolution (DPI)</label>
+        <input type="number" id="resolution" placeholder="Enter resolution">
+      </div>
+      <div class="input-group">
+        <label for="format">Image Format</label>
+        <select id="format">
+          <option value="png">PNG</option>
+          <option value="jpeg">JPEG</option>
+          <option value="webp">WebP</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="quality">Quality (1-100)</label>
+        <input type="number" id="quality" min="1" max="100" placeholder="Enter quality">
+      </div>
+      <button class="button" id="resize-btn">Resize Image</button>
+    </div>
+
+    <!-- Ad Space -->
+    <div class="ads">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_SENSE_ID" crossorigin="anonymous"></script>
+      <!-- Ad Unit -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
+           data-ad-slot="YOUR_AD_SLOT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Output Image -->
+    <div class="output-image" id="output-image">
+      <img id="resized-image" src="" alt="Resized Image">
+      <a id="download-link" class="button download-btn" download="resized-image.png">Download Image</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Image Resizer Tool. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('resize-btn').addEventListener('click', function () {
+      const fileInput = document.getElementById('image-upload');
+      const widthInput = document.getElementById('width');
+      const heightInput = document.getElementById('height');
+      const resolutionInput = document.getElementById('resolution');
+      const formatInput = document.getElementById('format');
+      const qualityInput = document.getElementById('quality');
+      const resizeUnit = document.getElementById('resize-unit').value;
+
+      if (fileInput.files.length === 0) {
+        alert('Please upload an image.');
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          let width = img.width;
+          let height = img.height;
+
+          if (resizeUnit === 'percent') {
+            const percent = parseFloat(widthInput.value) / 100;
+            width = img.width * percent;
+            height = img.height * percent;
+          } else if (resizeUnit === 'pixels') {
+            width = parseFloat(widthInput.value);
+            height = parseFloat(heightInput.value);
+          } else if (resizeUnit === 'cm') {
+            const dpi = parseFloat(resolutionInput.value) || 96;
+            width = (parseFloat(widthInput.value) * dpi) / 2.54;
+            height = (parseFloat(heightInput.value) * dpi) / 2.54;
+          } else if (resizeUnit === 'inches') {
+            const dpi = parseFloat(resolutionInput.value) || 96;
+            width = parseFloat(widthInput.value) * dpi;
+            height = parseFloat(heightInput.value) * dpi;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const format = formatInput.value;
+          const quality = parseFloat(qualityInput.value) / 100 || 1;
+
+          canvas.toBlob(function (blob) {
+            const url = URL.createObjectURL(blob);
+            const resizedImage = document.getElementById('resized-image');
+            const downloadLink = document.getElementById('download-link');
+
+            resizedImage.src = url;
+            downloadLink.href = url;
+            downloadLink.download = `resized-image.${format}`;
+            document.getElementById('output-image').style.display = 'block';
+          }, `image/${format}`, quality);
+        };
+      };
+
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
