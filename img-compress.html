@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Compress your images online easily with our responsive image compression tool. Optimize images for web use with adjustable compression levels.">
     <meta name="keywords" content="image compression, optimize images, image optimizer, compress images online">
-    <meta name="author" content="sameer">
+    <meta name="author" content="Sameer">
     <title>Image Compression Tool - Optimize Your Images Online</title>
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -64,7 +64,14 @@
             margin: 1.5rem 0;
         }
 
-        #compress-btn {
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        #compress-btn, #download-btn {
             background-color: #2196F3; /* Blue */
             color: white;
             border: none;
@@ -74,8 +81,20 @@
             transition: background-color 0.3s ease;
         }
 
-        #compress-btn:hover {
+        #compress-btn:hover, #download-btn:hover {
             background-color: #1E88E5; /* Darker Blue */
+        }
+
+        #uploaded-image {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        #uploaded-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         #output {
@@ -88,22 +107,7 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        #download-btn {
-            display: none;
-            background-color: #2196F3; /* Blue */
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
             margin-top: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        #download-btn:hover {
-            background-color: #1E88E5; /* Darker Blue */
         }
 
         footer {
@@ -125,6 +129,11 @@
 
             #compression-tool {
                 padding: 1rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
@@ -151,6 +160,12 @@
             </script>
         </section>
 
+        <!-- Uploaded Image Display -->
+        <div id="uploaded-image">
+            <h3>Uploaded Image</h3>
+            <img id="uploaded-img" src="#" alt="Uploaded Image" style="display: none;">
+        </div>
+
         <!-- Image Compression Tool -->
         <section id="compression-tool">
             <input type="file" id="image-input" accept="image/*">
@@ -158,10 +173,18 @@
             <br><br>
             <label for="compression-level">Compression Level: <span id="compression-value">0.5</span></label>
             <input type="range" id="compression-level" min="0" max="1" step="0.1" value="0.5">
-            <br><br>
-            <button id="compress-btn">Compress Image</button>
-            <div id="output"></div>
-            <button id="download-btn">Download Compressed Image</button>
+
+            <!-- Buttons -->
+            <div class="button-container">
+                <button id="compress-btn">Compress Image</button>
+                <button id="download-btn" style="display: none;">Download Compressed Image</button>
+            </div>
+
+            <!-- Compressed Image Display -->
+            <div id="output">
+                <h3>Compressed Image</h3>
+                <img id="compressed-img" src="#" alt="Compressed Image" style="display: none;">
+            </div>
         </section>
     </main>
 
@@ -177,6 +200,21 @@
         const compressionValue = document.getElementById('compression-value');
         compressionLevel.addEventListener('input', () => {
             compressionValue.textContent = compressionLevel.value;
+        });
+
+        // Display uploaded image
+        const imageInput = document.getElementById('image-input');
+        const uploadedImg = document.getElementById('uploaded-img');
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    uploadedImg.src = e.target.result;
+                    uploadedImg.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
         });
 
         // Image compression logic
@@ -195,10 +233,9 @@
                     const compressedFile = await imageCompression(file, options);
                     const reader = new FileReader();
                     reader.onload = (e) => {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        document.getElementById('output').innerHTML = '';
-                        document.getElementById('output').appendChild(img);
+                        const compressedImg = document.getElementById('compressed-img');
+                        compressedImg.src = e.target.result;
+                        compressedImg.style.display = 'block';
 
                         // Show download button
                         const downloadBtn = document.getElementById('download-btn');
