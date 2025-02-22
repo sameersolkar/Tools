@@ -15,7 +15,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #ffffff; /* White background */
             color: #333;
         }
 
@@ -23,28 +23,29 @@
             display: flex;
             align-items: center;
             justify-content: center; /* Center text horizontally */
-            background-color: #333; /* Black */
+            background-color: #ffffff; /* White background */
             padding: 1.5rem 1rem; /* Larger padding for header */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
 
         .header-container .title {
             font-size: 2rem; /* Larger font size */
-            color: white; /* White text */
+            color: #333; /* Dark text */
             margin: 0;
+            font-weight: bold; /* Bold text */
         }
 
         main {
-            padding: 0; /* Zero padding */
+            padding: 1rem; /* Padding for main content */
             max-width: 800px;
             margin: 0 auto;
         }
 
         #compression-console {
-            background: white;
-            padding: 1rem; /* Padding for console */
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: #ffffff; /* White background */
+            padding: 2rem; /* Padding for console */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
             text-align: center;
         }
 
@@ -54,46 +55,71 @@
 
         #compression-console label {
             display: inline-block;
-            background-color: #555; /* Dark Gray */
+            background-color: #007bff; /* Blue */
             color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 5px;
+            border-radius: 25px; /* Rounded corners */
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-size: 1rem;
         }
 
         #compression-console label:hover {
-            background-color: #444; /* Slightly Darker Gray */
+            background-color: #0056b3; /* Darker Blue */
         }
 
         #compression-level {
             width: 100%;
-            margin: 1rem 0; /* Margin for slider */
+            margin: 1.5rem 0; /* Margin for slider */
+            -webkit-appearance: none; /* Remove default styling */
+            height: 8px;
+            background: #e0e0e0; /* Light gray track */
+            border-radius: 5px; /* Rounded track */
+            outline: none;
+        }
+
+        #compression-level::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #007bff; /* Blue thumb */
+            border-radius: 50%; /* Circular thumb */
+            cursor: pointer;
+        }
+
+        #compression-level::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #007bff; /* Blue thumb */
+            border-radius: 50%; /* Circular thumb */
+            cursor: pointer;
         }
 
         .button-container {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin: 1rem 0; /* Margin for buttons */
+            margin: 1.5rem 0; /* Margin for buttons */
         }
 
         #compress-btn, #download-btn {
-            background-color: #555; /* Dark Gray */
+            background-color: #007bff; /* Blue */
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 5px;
+            border-radius: 25px; /* Rounded corners */
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-size: 1rem;
         }
 
         #compress-btn:hover, #download-btn:hover {
-            background-color: #444; /* Slightly Darker Gray */
+            background-color: #0056b3; /* Darker Blue */
         }
 
         #uploaded-image {
-            margin: 1rem 0; /* Margin for uploaded image */
+            margin: 1.5rem 0; /* Margin for uploaded image */
             text-align: center;
         }
 
@@ -104,12 +130,12 @@
         #uploaded-image img {
             max-width: 100%;
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
 
         #output {
-            margin: 1rem 0; /* Margin for compressed image */
+            margin: 1.5rem 0; /* Margin for compressed image */
             text-align: center;
         }
 
@@ -120,29 +146,30 @@
         #output img {
             max-width: 100%;
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
 
         footer {
-            background-color: #333; /* Black */
-            color: white;
+            background-color: #f8f9fa; /* Light gray */
+            color: #333; /* Dark text */
             text-align: center;
-            padding: 0.5rem;
+            padding: 1rem;
             position: fixed;
             bottom: 0;
             width: 100%;
             font-size: 0.9rem;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
 
         /* Responsive Design */
         @media (max-width: 600px) {
             main {
-                padding: 0; /* Zero padding for mobile */
+                padding: 0.5rem; /* Reduced padding for mobile */
             }
 
             #compression-console {
-                padding: 0.5rem; /* Reduced padding for mobile */
+                padding: 1rem; /* Reduced padding for mobile */
             }
 
             .button-container {
@@ -157,15 +184,15 @@
     </style>
 </head>
 <body>
-    <!-- Header with Black Background and Centered Text -->
+    <!-- Header with White Background and Centered Text -->
     <div class="header-container">
         <h1 class="title">Image Compression Tool</h1>
     </div>
 
     <!-- Upload Button -->
-    <div style="text-align: center; margin: 1rem 0;">
+    <div style="text-align: center; margin: 1.5rem 0;">
         <input type="file" id="image-input" accept="image/*" style="display: none;">
-        <label for="image-input" style="display: inline-block; background-color: #555; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">
+        <label for="image-input" style="display: inline-block; background-color: #007bff; color: white; padding: 0.75rem 1.5rem; border-radius: 25px; cursor: pointer; transition: background-color 0.3s ease;">
             Upload Image
         </label>
     </div>
