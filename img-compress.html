@@ -19,11 +19,19 @@
             color: #333;
         }
 
-        .title {
-            text-align: center;
+        .header-container {
+            display: flex;
+            align-items: center;
+            background-color: #333; /* Black */
+            padding: 0.5rem 1rem; /* Padding for header */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container .title {
             font-size: 1.5rem;
-            margin: 1rem 0;
-            color: #2196F3; /* Blue */
+            color: white; /* White text */
+            margin: 0;
+            flex: 1; /* Takes remaining space */
         }
 
         main {
@@ -46,7 +54,7 @@
 
         #compression-console label {
             display: inline-block;
-            background-color: #2196F3; /* Blue */
+            background-color: #555; /* Dark Gray */
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 5px;
@@ -55,7 +63,7 @@
         }
 
         #compression-console label:hover {
-            background-color: #1E88E5; /* Darker Blue */
+            background-color: #444; /* Slightly Darker Gray */
         }
 
         #compression-level {
@@ -71,7 +79,7 @@
         }
 
         #compress-btn, #download-btn {
-            background-color: #2196F3; /* Blue */
+            background-color: #555; /* Dark Gray */
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -81,12 +89,16 @@
         }
 
         #compress-btn:hover, #download-btn:hover {
-            background-color: #1E88E5; /* Darker Blue */
+            background-color: #444; /* Slightly Darker Gray */
         }
 
         #uploaded-image {
             margin: 1rem 0; /* Margin for uploaded image */
             text-align: center;
+        }
+
+        #uploaded-image h3 {
+            display: none; /* Hide "Uploaded Image" text */
         }
 
         #uploaded-image img {
@@ -101,6 +113,10 @@
             text-align: center;
         }
 
+        #output h3 {
+            display: none; /* Hide "Compressed Image" text */
+        }
+
         #output img {
             max-width: 100%;
             height: auto;
@@ -109,7 +125,7 @@
         }
 
         footer {
-            background-color: #333;
+            background-color: #333; /* Black */
             color: white;
             text-align: center;
             padding: 0.5rem;
@@ -137,15 +153,15 @@
     </style>
 </head>
 <body>
-    <!-- Title Above Upload Button -->
-    <div class="title">
-        Image Compression Tool
+    <!-- Header with Black Background -->
+    <div class="header-container">
+        <h1 class="title">Image Compression Tool</h1>
     </div>
 
     <!-- Upload Button -->
     <div style="text-align: center; margin: 1rem 0;">
         <input type="file" id="image-input" accept="image/*" style="display: none;">
-        <label for="image-input" style="display: inline-block; background-color: #2196F3; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">
+        <label for="image-input" style="display: inline-block; background-color: #555; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">
             Upload Image
         </label>
     </div>
@@ -165,13 +181,13 @@
 
         <!-- Uploaded Image Display -->
         <div id="uploaded-image">
-            <h3>Uploaded Image</h3>
+            <h3>Uploaded Image</h3> <!-- Hidden -->
             <img id="uploaded-img" src="#" alt="Uploaded Image" style="display: none;">
         </div>
 
         <!-- Compressed Image Display -->
         <div id="output">
-            <h3>Compressed Image</h3>
+            <h3>Compressed Image</h3> <!-- Hidden -->
             <img id="compressed-img" src="#" alt="Compressed Image" style="display: none;">
         </div>
     </main>
@@ -221,6 +237,10 @@
                     const compressedFile = await imageCompression(file, options);
                     const reader = new FileReader();
                     reader.onload = (e) => {
+                        // Hide uploaded image
+                        uploadedImg.style.display = 'none';
+
+                        // Display compressed image
                         const compressedImg = document.getElementById('compressed-img');
                         compressedImg.src = e.target.result;
                         compressedImg.style.display = 'block';
